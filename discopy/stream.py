@@ -63,7 +63,7 @@ category of streams of python types and functions.
 ...                >> fby >> copy).feedback()
 >>> with Diagram.hypergraph_equality:
 ...     assert fib == fib_
->>> fib_.draw(draw_type_labels=False, figsize=(5, 5),
+>>> fib_.draw(wire_labels=False, figsize=(5, 5),
 ...           path="docs/_static/stream/fibonacci-feedback.png")
 
 .. image:: /_static/stream/fibonacci-feedback.png
@@ -93,7 +93,7 @@ category of streams of python types and probabilistic functions.
 ...     x = fby(zero(), x)
 ...     return (x, x)
 
->>> walk.draw(draw_type_labels=False, figsize=(5, 5),
+>>> walk.draw(wire_labels=False, figsize=(5, 5),
 ...           path="docs/_static/stream/random-walk-feedback.png")
 
 .. image:: /_static/stream/random-walk-feedback.png
@@ -167,9 +167,8 @@ from typing import Callable, Optional
 from dataclasses import dataclass
 
 from discopy import symmetric
-from discopy.python import is_tuple
 from discopy.utils import (
-    AxiomError, Composable, Whiskerable, NamedGeneric, get_origin,
+    AxiomError, Composable, Whiskerable, NamedGeneric, get_origin, is_tuple,
     assert_isinstance, unbiased, inductive, classproperty, factory_name)
 
 
@@ -557,9 +556,9 @@ class Stream(Composable, Whiskerable, NamedGeneric['category']):
 
         >>> from discopy.drawing import Equation
         >>> Equation(f.unroll(2).now, fb.unroll(2).now, symbol="$\\\\mapsto$"
-        ...     ).draw(path="docs/_static/stream/feedback-example.png")
+        ...     ).draw(path="docs/_static/stream/feedback-unrolling.png")
 
-        .. image:: /_static/stream/feedback-example.png
+        .. image:: /_static/stream/feedback-unrolling.png
             :align: center
         """
         if mem is None or dom is None or cod is None:
